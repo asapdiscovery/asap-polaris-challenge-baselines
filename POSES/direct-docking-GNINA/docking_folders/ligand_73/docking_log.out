@@ -1,0 +1,156 @@
+Sender: LSF System <lsfadmin@lt22>
+Subject: Job 12014669: <run_asap> in cluster <lila> Done
+
+Job <run_asap> was submitted from host <lilac-ln02> by user <sheen> in cluster <lila> at Wed Feb  5 03:10:47 2025
+Job was executed on host(s) <lt22>, in queue <gpuqueue>, as user <sheen> in cluster <lila> at Wed Feb  5 04:24:16 2025
+</home/sheen> was used as the home directory.
+</lila/data/chodera/asap-restricted/POLARIS/asap-polaris-challenge-baselines/POSES/direct-docking-GNINA/input_folders/ligand_73> was used as the working directory.
+Started at Wed Feb  5 04:24:16 2025
+Terminated at Wed Feb  5 04:49:55 2025
+Results reported at Wed Feb  5 04:49:55 2025
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J run_asap
+#BSUB -q gpuqueue
+#BSUB -m lt-gpu
+#BSUB -gpu "num=1:j_exclusive=yes:mode=shared"
+#BSUB -n 1
+#BSUB -W 2:00
+#BSUB -oo docking_log.out
+#BSUB -eo docking_log.err
+
+
+source ~/.bashrc
+module load cuda/12.2
+module load singularity/3.2.0-rc1
+
+cd $LS_SUBCWD
+pwd
+
+# network device info
+ifconfig
+ulimit -c 0
+
+# we're running gnina  master:33846ee   Built Jul 24 2023.
+singularity run --nv /data/chodera/shared/apptainers/gnina.sif gnina -r SARS-CoV-2-protein.pdb -l ligand_to_dock.sdf --autobox_ligand SARS-CoV-2-ligand-reference.sdf -o docked_SARS-CoV-2.sdf --exhaustiveness 64
+
+singularity run --nv /data/chodera/shared/apptainers/gnina.sif gnina -r MERS-CoV-protein.pdb -l ligand_to_dock.sdf --autobox_ligand MERS-CoV-ligand-reference.sdf -o docked_MERS-CoV.sdf --exhaustiveness 64
+
+echo Done
+date
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   1536.88 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     2.00 GB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              5
+    Max Threads :                                90
+    Run time :                                   1540 sec.
+    Turnaround time :                            5948 sec.
+
+The output (if any) follows:
+
+/lila/data/chodera/asap-restricted/POLARIS/asap-polaris-challenge-baselines/POSES/direct-docking-GNINA/input_folders/ligand_73
+ens21f1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9000
+        inet 10.230.2.242  netmask 255.255.0.0  broadcast 10.230.255.255
+        inet6 fe80::ee0d:9aff:fe97:8db9  prefixlen 64  scopeid 0x20<link>
+        ether ec:0d:9a:97:8d:b9  txqueuelen 1000  (Ethernet)
+        RX packets 247775187702  bytes 2179520153609294 (1.9 PiB)
+        RX errors 0  dropped 3991  overruns 0  frame 0
+        TX packets 52606668772  bytes 141573055600985 (128.7 TiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 556033753  bytes 1550280073650 (1.4 TiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 556033753  bytes 1550280073650 (1.4 TiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina  master:33846ee   Built Jul 24 2023.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+Commandline: gnina -r SARS-CoV-2-protein.pdb -l ligand_to_dock.sdf --autobox_ligand SARS-CoV-2-ligand-reference.sdf -o docked_SARS-CoV-2.sdf --exhaustiveness 64
+Using random seed: -835013794
+
+0%   10   20   30   40   50   60   70   80   90   100%
+|----|----|----|----|----|----|----|----|----|----|
+***************************************************
+ | pose 0 | initial pose not within box
+
+mode |  affinity  |    CNN     |   CNN
+     | (kcal/mol) | pose score | affinity
+-----+------------+------------+----------
+    1       -8.54       0.6415      6.763
+    2       -8.41       0.5440      6.614
+    3       -8.86       0.4234      6.233
+    4       -9.11       0.3083      6.149
+    5       -7.77       0.3008      6.425
+    6       -7.94       0.2435      6.215
+    7       -7.76       0.2238      6.107
+    8       -8.39       0.2131      6.274
+    9       -7.48       0.1977      5.971
+              _             
+             (_)            
+   __ _ _ __  _ _ __   __ _ 
+  / _` | '_ \| | '_ \ / _` |
+ | (_| | | | | | | | | (_| |
+  \__, |_| |_|_|_| |_|\__,_|
+   __/ |                    
+  |___/                     
+
+gnina  master:33846ee   Built Jul 24 2023.
+gnina is based on smina and AutoDock Vina.
+Please cite appropriately.
+
+Commandline: gnina -r MERS-CoV-protein.pdb -l ligand_to_dock.sdf --autobox_ligand MERS-CoV-ligand-reference.sdf -o docked_MERS-CoV.sdf --exhaustiveness 64
+Using random seed: 923433113
+
+0%   10   20   30   40   50   60   70   80   90   100%
+|----|----|----|----|----|----|----|----|----|----|
+***************************************************
+ | pose 0 | initial pose not within box
+
+mode |  affinity  |    CNN     |   CNN
+     | (kcal/mol) | pose score | affinity
+-----+------------+------------+----------
+    1       -9.76       0.7305      7.024
+    2       -8.36       0.4780      6.570
+    3       -8.03       0.4748      6.701
+    4       -8.91       0.3558      6.535
+    5       -8.21       0.3225      6.511
+    6       -8.41       0.3054      6.404
+    7       -8.77       0.2862      6.507
+    8       -9.03       0.2774      6.492
+    9       -7.98       0.2459      6.374
+Done
+Wed Feb  5 04:49:55 EST 2025
+
+
+PS:
+
+Read file <docking_log.err> for stderr output of this job.
+

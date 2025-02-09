@@ -1,0 +1,5 @@
+==============================
+*** Open Babel Warning  in PerceiveBondOrders
+  Failed to kekulize aromatic bonds in OBMol::PerceiveBondOrders
+
+2025/02/05 04:01:30 user: unknown userid 7020
